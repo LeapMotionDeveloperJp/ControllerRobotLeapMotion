@@ -14,10 +14,10 @@
 <body>
 <script type="text/javascript">
     var initScene = function () {
-        Physijs.scripts.worker = 'leapjs-widgets/javascripts/lib/physijs_worker.js';
+        Physijs.scripts.worker = '../leapjs-widgets/javascripts/lib/physijs_worker.js';
         window.scene = new Physijs.Scene();
         window.scene.addEventListener('update', function () {
-            scene.simulate(undefined, 2);
+//            scene.simulate(undefined, 2);
         });
         window.scene.setGravity({x: 0, y: 0, z: 0});
         window.renderer = new THREE.WebGLRenderer({
@@ -38,21 +38,23 @@
         document.body.appendChild(window.renderer.domElement);
 
         window.widgets = new LeapWidgets(window.scene);
-        widgets.initLeapHand({sampleRecording: 'leapjs-widgets/recordings/buttons.lz'});
+//        widgets.initLeapHand({sampleRecording: '../leapjs-widgets/recordings/buttons.lz'});
+        widgets.initLeapHand({sampleRecording: ''});
 
-        widgets.createLabel("LeapJS Widgets - Buttons", new THREE.Vector3(0, 120, -110), 16, 0xffffff);
-        var counterLabel = widgets.createLabel("0", new THREE.Vector3(0, 0, -110), 16, 0xffffff);
+        widgets.createLabel("ボクシングロボット", new THREE.Vector3(0, 120, -110), 16, 0xffffff);
+//        var counterLabel = widgets.createLabel("0", new THREE.Vector3(0, 0, -110), 16, 0xffffff);
         var wall = widgets.createWall(new THREE.Vector3(0, 0, -200), new THREE.Vector3(500, 300, 100));
-        var decreaseButton = widgets.createButton("Decrease", new THREE.Vector3(-100, 0, -110), new THREE.Vector3(100, 70, 30));
-        var increaseButton = widgets.createButton("Increase", new THREE.Vector3(100, 0, -110), new THREE.Vector3(100, 70, 30));
+        var decreaseButton = widgets.createButton("左パンチ", new THREE.Vector3(-100, 0, -110), new THREE.Vector3(100, 70, 30));
+        var increaseButton = widgets.createButton("右パンチ", new THREE.Vector3(100, 0, -110), new THREE.Vector3(100, 70, 30));
         var xmlHttpRequest = new XMLHttpRequest();
+        config();
 
         decreaseButton.addEventListener('press', function (evt) {
-            counterLabel.setText(parseInt(counterLabel.getText()) - 1);
-            rightHand();
+//            counterLabel.setText(parseInt(counterLabel.getText()) - 1);
+            leftHand();
         });
         increaseButton.addEventListener('press', function (evt) {
-            counterLabel.setText(parseInt(counterLabel.getText()) + 1);
+//            counterLabel.setText(parseInt(counterLabel.getText()) + 1);
             rightHand();
         });
 
@@ -73,37 +75,78 @@
 
         window.addEventListener('resize', function () {
             camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
+//            camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.render(scene, camera);
         }, false);
 
         scene.add(camera);
 
-        function rightHand(){
+        function config(){
             xmlHttpRequest.open("POST", "http://192.168.0.20:8000/GPIO/8/function/out");
             xmlHttpRequest.addEventListener("progress", function (event) {
-                console.log("progress");
+            });
+            xmlHttpRequest.send();
+            xmlHttpRequest.addEventListener("load", function (event) {
+            });
+            xmlHttpRequest.open("POST", "http://192.168.0.20:8000/GPIO/24/function/out");
+            xmlHttpRequest.addEventListener("progress", function (event) {
+            });
+            xmlHttpRequest.send();
+            xmlHttpRequest.addEventListener("load", function (event) {
+            });
+        }
+
+        function rightHand(){
+            xmlHttpRequest.open("POST", "http://192.168.0.20:8000/GPIO/8/value/1");
+            xmlHttpRequest.addEventListener("progress", function (event) {
+//                console.log("progress");
 //                console.log(xmlHttpRequest.getAllResponseHeaders());
             });
             xmlHttpRequest.send();
             xmlHttpRequest.addEventListener("load", function (event) {
-                console.log("load");
-                console.log(xmlHttpRequest.responseText);
+//                console.log("load");
+//                console.log(xmlHttpRequest.responseText);
             });
             setTimeout(function(){
-                xmlHttpRequest.open("POST", "http://192.168.0.20:8000/GPIO/8/function/in");
+                xmlHttpRequest.open("POST", "http://192.168.0.20:8000/GPIO/8/value/0");
                 xmlHttpRequest.addEventListener("progress", function (event) {
-                    console.log("progress");
+//                    console.log("progress");
 //                console.log(xmlHttpRequest.getAllResponseHeaders());
                 });
                 xmlHttpRequest.send();
                 xmlHttpRequest.addEventListener("load", function (event) {
-                    console.log("load");
-                    console.log(xmlHttpRequest.responseText);
+//                    console.log("load");
+//                    console.log(xmlHttpRequest.responseText);
                 });
-            },3000);
+            },1000);
         }
+
+        function leftHand(){
+            xmlHttpRequest.open("POST", "http://192.168.0.20:8000/GPIO/24/value/1");
+            xmlHttpRequest.addEventListener("progress", function (event) {
+//                console.log("progress");
+//                console.log(xmlHttpRequest.getAllResponseHeaders());
+            });
+            xmlHttpRequest.send();
+            xmlHttpRequest.addEventListener("load", function (event) {
+//                console.log("load");
+//                console.log(xmlHttpRequest.responseText);
+            });
+            setTimeout(function(){
+                xmlHttpRequest.open("POST", "http://192.168.0.20:8000/GPIO/24/value/0");
+                xmlHttpRequest.addEventListener("progress", function (event) {
+//                    console.log("progress");
+//                console.log(xmlHttpRequest.getAllResponseHeaders());
+                });
+                xmlHttpRequest.send();
+                xmlHttpRequest.addEventListener("load", function (event) {
+//                    console.log("load");
+//                    console.log(xmlHttpRequest.responseText);
+                });
+            },1000);
+        }
+
     };
     initScene();
 </script>
