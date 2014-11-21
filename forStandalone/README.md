@@ -2,9 +2,4 @@
 
 ## Configuration
 
-[![WeblOPi](https://code.google.com/p/webiopi/)
-leapjs-widgets
-
-
-
-
+[WeblOPi](https://code.google.com/p/webiopi/)

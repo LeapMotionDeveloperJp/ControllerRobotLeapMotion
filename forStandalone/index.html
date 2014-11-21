@@ -14,6 +14,9 @@
 <body>
 <script type="text/javascript">
     var initScene = function () {
+        var rightGpio = "http://192.168.0.20:8000/GPIO/18/";
+        var leftGpio = "http://192.168.0.20:8000/GPIO/24/";
+
         Physijs.scripts.worker = '../leapjs-widgets/javascripts/lib/physijs_worker.js';
         window.scene = new Physijs.Scene();
         window.scene.addEventListener('update', function () {
@@ -47,8 +50,6 @@
         var decreaseButton = widgets.createButton("左パンチ", new THREE.Vector3(-100, 0, -110), new THREE.Vector3(100, 70, 30));
         var increaseButton = widgets.createButton("右パンチ", new THREE.Vector3(100, 0, -110), new THREE.Vector3(100, 70, 30));
         var xmlHttpRequest = new XMLHttpRequest();
-        config();
-
         decreaseButton.addEventListener('press', function (evt) {
 //            counterLabel.setText(parseInt(counterLabel.getText()) - 1);
             leftHand();
@@ -79,74 +80,29 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.render(scene, camera);
         }, false);
-
         scene.add(camera);
 
-        function config(){
-            xmlHttpRequest.open("POST", "http://192.168.0.20:8000/GPIO/8/function/out");
-            xmlHttpRequest.addEventListener("progress", function (event) {
-            });
-            xmlHttpRequest.send();
-            xmlHttpRequest.addEventListener("load", function (event) {
-            });
-            xmlHttpRequest.open("POST", "http://192.168.0.20:8000/GPIO/24/function/out");
-            xmlHttpRequest.addEventListener("progress", function (event) {
-            });
-            xmlHttpRequest.send();
-            xmlHttpRequest.addEventListener("load", function (event) {
-            });
-        }
-
         function rightHand(){
-            xmlHttpRequest.open("POST", "http://192.168.0.20:8000/GPIO/8/value/1");
-            xmlHttpRequest.addEventListener("progress", function (event) {
-//                console.log("progress");
-//                console.log(xmlHttpRequest.getAllResponseHeaders());
-            });
+            xmlHttpRequest.open("POST", rightGpio + "function/out");
             xmlHttpRequest.send();
-            xmlHttpRequest.addEventListener("load", function (event) {
-//                console.log("load");
-//                console.log(xmlHttpRequest.responseText);
-            });
+            xmlHttpRequest.open("POST", rightGpio + "value/1");
+            xmlHttpRequest.send();
             setTimeout(function(){
-                xmlHttpRequest.open("POST", "http://192.168.0.20:8000/GPIO/8/value/0");
-                xmlHttpRequest.addEventListener("progress", function (event) {
-//                    console.log("progress");
-//                console.log(xmlHttpRequest.getAllResponseHeaders());
-                });
+                xmlHttpRequest.open("POST", rightGpio + "value/0");
                 xmlHttpRequest.send();
-                xmlHttpRequest.addEventListener("load", function (event) {
-//                    console.log("load");
-//                    console.log(xmlHttpRequest.responseText);
-                });
             },1000);
         }
 
         function leftHand(){
-            xmlHttpRequest.open("POST", "http://192.168.0.20:8000/GPIO/24/value/1");
-            xmlHttpRequest.addEventListener("progress", function (event) {
-//                console.log("progress");
-//                console.log(xmlHttpRequest.getAllResponseHeaders());
-            });
+            xmlHttpRequest.open("POST", leftGpio + "function/out");
             xmlHttpRequest.send();
-            xmlHttpRequest.addEventListener("load", function (event) {
-//                console.log("load");
-//                console.log(xmlHttpRequest.responseText);
-            });
+            xmlHttpRequest.open("POST", leftGpio + "value/1");
+            xmlHttpRequest.send();
             setTimeout(function(){
-                xmlHttpRequest.open("POST", "http://192.168.0.20:8000/GPIO/24/value/0");
-                xmlHttpRequest.addEventListener("progress", function (event) {
-//                    console.log("progress");
-//                console.log(xmlHttpRequest.getAllResponseHeaders());
-                });
+                xmlHttpRequest.open("POST", leftGpio + "value/0");
                 xmlHttpRequest.send();
-                xmlHttpRequest.addEventListener("load", function (event) {
-//                    console.log("load");
-//                    console.log(xmlHttpRequest.responseText);
-                });
             },1000);
         }
-
     };
     initScene();
 </script>

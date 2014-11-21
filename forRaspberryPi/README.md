@@ -1,9 +1,3 @@
-# Controller for Robot using the Leap Motion on Node.js
+# Controller for Robot using the Leap Motion
 
 メイカー・フェア・トウキョウ 2014 出展用
-
-## Configuration
-
-
-
-
