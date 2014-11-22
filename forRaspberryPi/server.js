@@ -1,35 +1,52 @@
 require('leapjs/template/entry');
-require('leapjs-plugins/main/hand-entry/leap.hand-entry');
+require('leapjs-plugins/main/screen-position/leap.screen-position');
 var request = require('request');
-var controller = new Leap.Controller()
-//    .use('handEntry')
-    ;
+var controller = new Leap.Controller();
 var frameCount = 0;
 var position = [];
 var rightFlag = false;
 var leftFlag = false;
-var rightGpio = "http://192.168.0.20:8000/GPIO/18/";
-var leftGpio = "http://192.168.0.20:8000/GPIO/24/";
-var depth = -120;
+var rightGpioUrl = "http://192.168.0.20:8000/GPIO/18/";
+var leftGpioUrl = "http://192.168.0.20:8000/GPIO/24/";
+var distance = -120;
 var axe = 2;
-
+if(process.argv[2] == "y"){
+    console.log("start Y axe");
+    distance = 200;
+    axe = 1;
+}
 controller.on("frame", function (frame) {
     var handsLength = frame.hands.length;
     for (var i = 0; i < handsLength; i++) {
         var hand = frame.hands[i];
         position = hand.palmPosition;
+//        console.log("position: " + position);
         var velocity = hand.palmVelocity;
         var direction = hand.direction;
         var type = hand.type;
-        if (type == "left") {
-            if (position[axe] < depth && !leftFlag) {
-                leftFlag = true;
-                console.log("Frame: " + frame.id + " @ " + frame.timestamp);
+        if(axe == 2){
+            if (type == "left") {
+                if (position[axe] < distance && !leftFlag) {
+                    leftFlag = true;
+                    console.log("Frame: " + frame.id + " @ " + frame.timestamp);
+                }
+            } else {
+                if (position[axe] < distance && !rightFlag) {
+                    rightFlag = true;
+                    console.log("Frame: " + frame.id + " @ " + frame.timestamp);
+                }
             }
-        } else {
-            if (position[axe] < depth && !rightFlag) {
-                rightFlag = true;
-                console.log("Frame: " + frame.id + " @ " + frame.timestamp);
+        }else{
+            if (type == "left") {
+                if (position[axe] > distance && !leftFlag) {
+                    leftFlag = true;
+                    console.log("Frame: " + frame.id + " @ " + frame.timestamp);
+                }
+            } else {
+                if (position[axe] > distance && !rightFlag) {
+                    rightFlag = true;
+                    console.log("Frame: " + frame.id + " @ " + frame.timestamp);
+                }
             }
         }
     }
@@ -39,18 +56,18 @@ controller.on("frame", function (frame) {
             console.log("Right hand.");
             rightFlag = false;
             request
-                .post(rightGpio + "function/out")
+                .post(rightGpioUrl + "function/out")
                 .on('error', function(err) {
                     console.log(err)
                 });
             request
-                .post(rightGpio + "value/1")
+                .post(rightGpioUrl + "value/1")
                 .on('error', function(err) {
                     console.log(err)
                 });
             setTimeout(function () {
                 request
-                    .post(rightGpio + "value/0")
+                    .post(rightGpioUrl + "value/0")
                     .on('error', function(err) {
                         console.log(err)
                     });
@@ -60,18 +77,18 @@ controller.on("frame", function (frame) {
             console.log("Left hand.");
             leftFlag = false;
             request
-                .post(leftGpio + "function/out")
+                .post(leftGpioUrl + "function/out")
                 .on('error', function(err) {
                     console.log(err)
                 });
             request
-                .post(leftGpio + "value/1")
+                .post(leftGpioUrl + "value/1")
                 .on('error', function(err) {
                     console.log(err)
                 });
             setTimeout(function () {
                 request
-                    .post(leftGpio + "value/0")
+                    .post(leftGpioUrl + "value/0")
                     .on('error', function(err) {
                         console.log(err)
                     });
