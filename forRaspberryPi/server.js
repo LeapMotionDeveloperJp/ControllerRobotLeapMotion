@@ -1,62 +1,81 @@
 require('leapjs/template/entry');
 require('leapjs-plugins/main/hand-entry/leap.hand-entry');
-
 var request = require('request');
-var frameCount = 0;
-var position;
 var controller = new Leap.Controller()
 //    .use('handEntry')
     ;
+var frameCount = 0;
+var position = [];
 var rightFlag = false;
 var leftFlag = false;
 var rightGpio = "http://192.168.0.20:8000/GPIO/18/";
 var leftGpio = "http://192.168.0.20:8000/GPIO/24/";
+var depth = -120;
+var axe = 2;
 
 controller.on("frame", function (frame) {
-//    console.log("Frame: " + frame.id + " @ " + frame.timestamp);
-    console.log("frame.hands: " + frame.hands);
-
-    if(frame.hands.length > 0)
-    {
-        var hand = frame.hands;
+    var handsLength = frame.hands.length;
+    for (var i = 0; i < handsLength; i++) {
+        var hand = frame.hands[i];
         position = hand.palmPosition;
         var velocity = hand.palmVelocity;
         var direction = hand.direction;
         var type = hand.type;
-        var depth = 120;
-
-        if(type == "left"){
-            if(position[1] > depth){
+        if (type == "left") {
+            if (position[axe] < depth && !leftFlag) {
                 leftFlag = true;
-                console.log("position[1]: " + position[1]);
                 console.log("Frame: " + frame.id + " @ " + frame.timestamp);
-                console.log("Left hand.")
             }
         } else {
-            if(position[1] > depth){
+            if (position[axe] < depth && !rightFlag) {
                 rightFlag = true;
-                console.log("position[1]: " + position[1]);
                 console.log("Frame: " + frame.id + " @ " + frame.timestamp);
-                console.log("Right hand.")
             }
         }
-    }else{
-        if(rightFlag){
+    }
+    if (handsLength < 1) {
+        if (rightFlag) {
             // 右パンチイベント発火
-            request.post(rightGpio + "function/out");
-            request.post(rightGpio + "value/1");
+            console.log("Right hand.");
             rightFlag = false;
-            setTimeout(function(){
-                request.post(rightGpio + "value/0");
-            },1000);
-        }else if(leftFlag){
+            request
+                .post(rightGpio + "function/out")
+                .on('error', function(err) {
+                    console.log(err)
+                });
+            request
+                .post(rightGpio + "value/1")
+                .on('error', function(err) {
+                    console.log(err)
+                });
+            setTimeout(function () {
+                request
+                    .post(rightGpio + "value/0")
+                    .on('error', function(err) {
+                        console.log(err)
+                    });
+            }, 1000);
+        } else if (leftFlag) {
             // 左パンチイベント発火
-            request.post(leftGpio + "function/out");
-            request.post(leftGpio + "value/1");
+            console.log("Left hand.");
             leftFlag = false;
-            setTimeout(function(){
-                request.post(leftGpio + "value/0");
-            },1000);
+            request
+                .post(leftGpio + "function/out")
+                .on('error', function(err) {
+                    console.log(err)
+                });
+            request
+                .post(leftGpio + "value/1")
+                .on('error', function(err) {
+                    console.log(err)
+                });
+            setTimeout(function () {
+                request
+                    .post(leftGpio + "value/0")
+                    .on('error', function(err) {
+                        console.log(err)
+                    });
+            }, 1000);
         }
     }
 //    position = null;
@@ -64,11 +83,13 @@ controller.on("frame", function (frame) {
 
 //
 setInterval(function () {
-    console.log("position: " + position);
+    if(position.length > 0){
+        console.log("position[axe]: " + position[axe]);
+    }
 //    var time = frameCount / 2;
 //    console.log("received " + frameCount + " frames @ " + time + "fps");
 //    frameCount = 0;
-}, 2000);
+}, 1000);
 
 controller.on('ready', function () {
     console.log("ready");
