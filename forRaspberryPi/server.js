@@ -6,8 +6,8 @@ var frameCount = 0;
 var position = [];
 var rightFlag = false;
 var leftFlag = false;
-var rightGpioUrl = "http://192.168.0.20:8000/GPIO/18/";
-var leftGpioUrl = "http://192.168.0.20:8000/GPIO/24/";
+var rightGpioUrl = "http://192.168.0.20:8000/GPIO/25/";
+var leftGpioUrl = "http://192.168.0.20:8000/GPIO/23/";
 var distance = -120;
 var axe = 2;
 if(process.argv[2] == "y"){
@@ -25,7 +25,7 @@ controller.on("frame", function (frame) {
         var direction = hand.direction;
         var type = hand.type;
         if(axe == 2){
-            if (type == "left") {
+            if (type != "left") {
                 if (position[axe] < distance && !leftFlag) {
                     leftFlag = true;
                     console.log("Frame: " + frame.id + " @ " + frame.timestamp);
@@ -37,7 +37,7 @@ controller.on("frame", function (frame) {
                 }
             }
         }else{
-            if (type == "left") {
+            if (type != "left") {
                 if (position[axe] > distance && !leftFlag) {
                     leftFlag = true;
                     console.log("Frame: " + frame.id + " @ " + frame.timestamp);
