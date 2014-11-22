@@ -6,7 +6,8 @@
   "dependencies": {
     "leapjs": "~0.6.2",
     "leapjs-plugins": "0.1.9",
-    "request": "2.48.0"
+    "request": "2.48.0",
+    "three": "^0.66.31"
   },
   "devDependencies": {},
   "scripts": {
