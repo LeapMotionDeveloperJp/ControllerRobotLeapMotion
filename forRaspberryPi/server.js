@@ -4,25 +4,22 @@ var frameCount = 0;
 var controller = new Leap.Controller();
 controller.on("frame", function (frame) {
 //    console.log("Frame: " + frame.id + " @ " + frame.timestamp);
-    frameCount++;
-    if(frameCount > 1000){
-        if(frame.hands.length > 0)
-        {
-            var hand = frame.hands[0];
-            var position = hand.palmPosition;
-            console.log("position: " + position);
-            var velocity = hand.palmVelocity;
-            console.log("velocity: " + velocity);
-            var direction = hand.direction;
-            console.log("direction: " + direction);
-            var type = hand.type;
-            if(type == "left"){
-                console.log("Left hand.");
-            } else {
+    if(frame.hands.length > 0)
+    {
+        var hand = frame.hands[0];
+        var position = hand.palmPosition;
+        var velocity = hand.palmVelocity;
+        var direction = hand.direction;
+        var type = hand.type;
+        if(type == "left"){
+            console.log("Frame: " + frame.id + " @ " + frame.timestamp);
+            console.log("Left hand.");
+        } else {
+            if(position[2] < -120){
+                console.log("Frame: " + frame.id + " @ " + frame.timestamp);
                 console.log("Right hand.")
             }
         }
-        frameCount = 0;
     }
 });
 
