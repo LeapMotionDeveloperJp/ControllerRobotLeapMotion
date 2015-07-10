@@ -1,7 +1,6 @@
 /**
  * A module control Rodeo Machine
  * @module cylon
- * @module leap
  */
 var Cylon = require('cylon');
 var arduinoPin = 13;
