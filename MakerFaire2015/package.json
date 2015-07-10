@@ -1,0 +1,28 @@
+{
+  "name": "rodeo_machine",
+  "version": "1.0.0",
+  "description": "A module control Rodeo Machine",
+  "main": "RodeoMachine.js",
+  "dependencies": {
+    "cylon": "^1.1.0",
+    "cylon-i2c": "^0.22.0",
+    "cylon-leapmotion": "^0.19.0",
+    "node-gyp": "^2.0.1",
+    "cylon-firmata": "^0.22.0",
+    "cylon-gpio": "^0.26.0",
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node derby.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeapMotionDeveloperJp/ControllerRobotLeapMotion.git"
+  },
+  "author": "LeapMotionDevelopersJp",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/LeapMotionDeveloperJp/ControllerRobotLeapMotion/issues"
+  },
+  "homepage": "https://github.com/LeapMotionDeveloperJp/ControllerRobotLeapMotion#readme"
+}
