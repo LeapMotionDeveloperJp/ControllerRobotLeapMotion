@@ -13,7 +13,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node derby.js"
+    "test": "node RodeoMachine.js"
   },
   "repository": {
     "type": "git",
