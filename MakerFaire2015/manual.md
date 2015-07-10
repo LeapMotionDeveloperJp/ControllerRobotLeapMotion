@@ -13,6 +13,6 @@
 - 親御さんはお子さんが乗馬マシンから落ちないように注意して見守ってください
 - ヘッドマウントディスプレイは酔うので、体調が悪い方やおなかが空いている方は利用しないでください
 
-## LeapMotion Developers JP
+### LeapMotion Developers JP
 - https://www.facebook.com/groups/leapmotionJp/
 - Facebookで「leapmotionJp」で検索
