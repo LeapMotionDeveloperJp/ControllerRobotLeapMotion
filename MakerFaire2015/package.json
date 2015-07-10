@@ -5,11 +5,13 @@
   "main": "RodeoMachine.js",
   "dependencies": {
     "cylon": "^1.1.0",
-    "cylon-i2c": "^0.22.0",
-    "cylon-leapmotion": "^0.19.0",
-    "node-gyp": "^2.0.1",
     "cylon-firmata": "^0.22.0",
     "cylon-gpio": "^0.26.0",
+    "cylon-i2c": "^0.22.0",
+    "cylon-leapmotion": "^0.19.0",
+    "leapjs": "^0.6.4",
+    "request": "^2.58.0",
+    "ws": "^0.7.2"
   },
   "devDependencies": {},
   "scripts": {

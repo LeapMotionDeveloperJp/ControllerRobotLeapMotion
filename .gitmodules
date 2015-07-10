@@ -1,6 +1,0 @@
-[submodule "leapjs-widgets"]
-	path = leapjs-widgets
-	url = https://github.com/raimo/leapjs-widgets.git
-[submodule "VRCollage"]
-	path = VRCollage
-	url = https://github.com/leapmotion/VRCollage.git

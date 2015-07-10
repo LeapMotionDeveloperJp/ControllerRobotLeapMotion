@@ -109,9 +109,9 @@ controller.on("frame", function (frame) {
 setInterval(function () {
     if(position.length > 0){
         console.log("position[axe]: " + position[axe] * scale);
-//        console.log("position[0]: " + position[0] * scale);
-//        console.log("position[1]: " + position[1] * scale);
-//        console.log("position[2]: " + position[2] * scale);
+//        console.log("position[0]: " + position[0] * SCALE);
+//        console.log("position[1]: " + position[1] * SCALE);
+//        console.log("position[2]: " + position[2] * SCALE);
     }
 //    var time = frameCount / 2;
 //    console.log("received " + frameCount + " frames @ " + time + "fps");
