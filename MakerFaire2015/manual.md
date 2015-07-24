@@ -44,4 +44,4 @@
 
 ### LeapMotion Developers JP
 - https://www.facebook.com/groups/leapmotionJp/
-- Facebookで「leapmotionJp」で検索
+- Facebookで「leapmotionJp」で検索して「いいね」してください！！
