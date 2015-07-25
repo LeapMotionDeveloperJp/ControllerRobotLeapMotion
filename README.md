@@ -5,8 +5,9 @@
 [WeblOPi](https://code.google.com/p/webiopi/)
 
 ## System dependencies
-NodeJs v0.10.26
-Python
+
+- NodeJs v0.10.26
+- Python
 
 ## License
 Apache License, Version 2.0
