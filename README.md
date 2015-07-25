@@ -1,5 +1,5 @@
 # Controller for Robot using the Leap Motion
-メイカー・フェア・トウキョウ 出展用
+メイカー・フェア・トウキョウ2015 出展用
 
 ## Configuration
 
