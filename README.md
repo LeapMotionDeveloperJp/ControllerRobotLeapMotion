@@ -2,7 +2,13 @@
 メイカー・フェア・トウキョウ 出展用
 
 ## Configuration
-[WeblOPi](https://code.google.com/p/webiopi/)
+
+- [LeapMotion](https://www.leapmotion.com)
+- [WeblOPi](https://code.google.com/p/webiopi/)
+- [mjpg-streamer](http://code.google.com/p/mjpg-streamer/)
+- [Raspberry Pi](https://www.raspberrypi.org)
+- [Arduino](https://www.arduino.cc)
+- ロデオマシン
 
 ## System dependencies
 
