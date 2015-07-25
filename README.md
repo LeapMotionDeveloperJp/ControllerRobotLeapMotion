@@ -6,6 +6,7 @@
 
 ## System dependencies
 NodeJs v0.10.26
+Python
 
 ## License
 Apache License, Version 2.0
