@@ -10,6 +10,8 @@
 - [Arduino](https://www.arduino.cc)
 - ロデオマシン
 
+![Image of ConfigureFig1](https://github.com/LeapMotionDeveloperJp/ControllerRobotLeapMotion/blob/master/MakerFaire2015/ConfigureFig1.jpg)
+
 ## System dependencies
 
 - NodeJs v0.10.26
