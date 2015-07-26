@@ -62,4 +62,4 @@
 
 ### LeapMotion Developers JP
 - https://www.facebook.com/groups/leapmotionJp/
-- Facebookで「leapmotionJp」で検索して「いいね」してください！！
+- へーって思ったら、Facebookで「leapmotionJp」で検索して「メンバー追加」してください m(__)m

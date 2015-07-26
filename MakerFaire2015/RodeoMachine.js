@@ -31,14 +31,15 @@ const ARDUINO_PIN = 13;
 var LeapMotionService = Cylon.robot({
     connections: {
         leap: { adaptor: 'leapmotion' },
-//        arduino: { adaptor: 'firmata', port: '/dev/tty.usbmodemfd131' }
+        arduino: { adaptor: 'firmata', port: '/dev/tty.usbmodemfd131' }
     },
     devices: {
-//        servo: { driver: 'servo', pin: ARDUINO_PIN, connection: 'arduino' }
+        servo: { driver: 'servo', pin: ARDUINO_PIN, connection: 'arduino' }
     },
     work: function (my) {
         const GPIO_PIN = '/GPIO/24/';
-        const GPIO_URL = 'http://192.168.0.20:8000' + GPIO_PIN;
+        const GPIO_URL = 'http://192.168.179.11:8000' + GPIO_PIN;   // for A
+//        const GPIO_URL = 'http://192.168.179.13:8000' + GPIO_PIN;   // for B
         const ANGLE = 46;
         const RESET_ANGLE = 0;
         const ACTIVITY_TIME = 4000;

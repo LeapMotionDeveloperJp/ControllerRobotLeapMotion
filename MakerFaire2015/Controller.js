@@ -2,8 +2,11 @@
  * A module control LeapMotion Server Start/Stop
  * @module ws
  */
+var arguments = process.argv.slice(2);
+
 const MACHINE_A = "ws://127.0.0.1:8080";
-const MACHINE_B = "ws://127.0.0.2:8080";
+//const MACHINE_A = "ws://192.168.179.10:8080";   // for A
+const MACHINE_B = "ws://192.168.179.12:8080";   // for B
 
 var WebSocket = require("ws")
     , ws = new WebSocket(MACHINE_A);

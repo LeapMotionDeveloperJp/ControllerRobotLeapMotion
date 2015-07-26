@@ -1,7 +1,7 @@
 {
   "name": "rodeo_machine",
   "version": "1.0.0",
-  "description": "A module control Rodeo Machine",
+  "description": "LeapMotion Server",
   "main": "RodeoMachine.js",
   "dependencies": {
     "cylon": "^1.1.0",
