@@ -19,7 +19,7 @@ gort arduino upload firmata /dev/cu.usbmodem14a31
 
 ```
 git clone https://github.com/LeapMotionDeveloperJp/ControllerRobotLeapMotion.git
-cd MakerFaire2015
+cd ControllerRobotLeapMotion/MakerFaire2015
 npm install
 sed -i '' 's/\/dev\/tty.usbmodemfd131/\/dev\/************/g' RodeoMachine.js
 node RodeoMachine.js
