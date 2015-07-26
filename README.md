@@ -1,21 +1,11 @@
-# Controller for Robot using the Leap Motion
-メイカー・フェア・トウキョウ2015 出展用
+# メイカー・フェア・トウキョウ 出展用
 
-## Configuration
+## 2014
 
-- [LeapMotion](https://www.leapmotion.com)
-- [WeblOPi](https://code.google.com/p/webiopi/)
-- [mjpg-streamer](http://code.google.com/p/mjpg-streamer/)
-- [Raspberry Pi](https://www.raspberrypi.org)
-- [Arduino](https://www.arduino.cc)
-- ロデオマシン
+ - [MakerFaire-BoxingRobot](https://github.com/LeapMotionDeveloperJp/MakerFaire-BoxingRobot)
+ - [「リモート操作するボクシングロボット」 by LeapMotionDevelopersJp│MakersHub](https://makershub.jp/make/927)
 
-![Image of ConfigureFig1](https://github.com/LeapMotionDeveloperJp/ControllerRobotLeapMotion/blob/master/MakerFaire2015/ConfigureFig1.jpg)
-
-## System dependencies
-
-- NodeJs v0.10.26
-- Python
+## 2015
 
 ## License
 Apache License, Version 2.0
