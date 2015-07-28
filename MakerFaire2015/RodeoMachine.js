@@ -31,7 +31,8 @@ const ARDUINO_PIN = 13;
 var LeapMotionService = Cylon.robot({
     connections: {
         leap: { adaptor: 'leapmotion' },
-        arduino: { adaptor: 'firmata', port: '/dev/tty.usbmodemfd131' }
+	//    arduino: { adaptor: 'firmata', port: 'COM3' } // for Windows
+    	arduino: { adaptor: 'firmata', port: '/dev/tty.usbmodemfd131' }
     },
     devices: {
         servo: { driver: 'servo', pin: ARDUINO_PIN, connection: 'arduino' }
