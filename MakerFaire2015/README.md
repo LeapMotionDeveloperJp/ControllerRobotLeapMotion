@@ -27,20 +27,36 @@ node Controller.js
 ```
 
 ## Configuration
-
-- [LeapMotion](https://www.leapmotion.com)
-- [WeblOPi](https://code.google.com/p/webiopi/)
-- [mjpg-streamer](http://code.google.com/p/mjpg-streamer/)
-- [Raspberry Pi](https://www.raspberrypi.org)
-- [Arduino](https://www.arduino.cc)
-- ロデオマシンほか LeapMotionDeveloperJp/ControllerRobotLeapMotion#1
-
 ![Image of ConfigureFig1](https://github.com/LeapMotionDeveloperJp/ControllerRobotLeapMotion/blob/master/MakerFaire2015/ConfigureFig1.jpg)
+
+### RaspberryPi
+
+#### GPIO
+
+- Pin 入力 23
+- Pin 出力 24
+
+#### Port
+
+- 8080 WeblOPi
+- 8000 mjpg-streamer
+
+### Arduino
+
+#### PWM
+
+- Pin　13
 
 ## System dependencies
 
 - NodeJs v0.10.26
 - Python 2.7.9
+- [LeapMotion](https://www.leapmotion.com)
+- [WeblOPi](https://code.google.com/p/webiopi/)
+- [mjpg-streamer](http://code.google.com/p/mjpg-streamer/)
+- [Raspberry Pi](https://www.raspberrypi.org)
+- [Arduino](https://www.arduino.cc)
+- ロデオマシンほか
 
 ## License
 Apache License, Version 2.0
