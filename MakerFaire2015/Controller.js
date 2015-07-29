@@ -4,15 +4,14 @@
  */
 var arguments = process.argv.slice(2);
 
-// const MACHINE_A = "ws:127.0.0.1:8080";
 const MACHINE_A = "ws:192.168.179.10:8080";    // for A
-const MACHINE_B = "ws:192.168.179.12:8090";    // for B
+const MACHINE_B = "ws:192.168.179.12:8080";    // for B
 
 var WebSocket = require("ws")
     , ws = new WebSocket(MACHINE_A);
 var WebSocket2 = require("ws")
     , ws2 = new WebSocket2(MACHINE_B);
-const INTERVAL = 10000;   1000 * 60  // 1 min
+const INTERVAL = 1000 * 60;  // 1 min
 const SEC1_INTERVAL = 1000;
 var oneSecond = setInterval(secondLog, SEC1_INTERVAL);
 
