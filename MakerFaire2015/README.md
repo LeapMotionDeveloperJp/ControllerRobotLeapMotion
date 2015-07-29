@@ -40,7 +40,7 @@ node Controller.js
 ## System dependencies
 
 - NodeJs v0.10.26
-- Python
+- Python 2.7.9
 
 ## License
 Apache License, Version 2.0
