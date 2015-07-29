@@ -4,8 +4,8 @@
  */
 var arguments = process.argv.slice(2);
 
-const MACHINE_A = "ws:192.168.179.10:8080";    // for A
-const MACHINE_B = "ws:192.168.179.12:8080";    // for B
+const MACHINE_A = "ws:192.168.179.10:8090";    // for A
+const MACHINE_B = "ws:192.168.179.12:8090";    // for B
 
 var WebSocket = require("ws")
     , ws = new WebSocket(MACHINE_A);

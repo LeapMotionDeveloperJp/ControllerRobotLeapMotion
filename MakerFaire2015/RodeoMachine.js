@@ -10,12 +10,12 @@ var Cylon = require('cylon');
 var isGaming = false;
 var isReady = false;
 var WebSocketServer = require('ws').Server
-    , wss = new WebSocketServer({port: 8080});
+    , wss = new WebSocketServer({port: 8090});
 wss.on('connection', function (ws) {
     ws.on('message', function (message) {
         if (message == 'start') {
             if(!isReady){
-                console.log('Start Service');
+                console.log('✿❁✿❁✿❁ Start Service ✿❁✿❁✿❁');
                 LeapMotionService.start();
                 isReady = true;
                 isGaming = true;
@@ -23,7 +23,7 @@ wss.on('connection', function (ws) {
                 isGaming = true;
             }
         } else if(message == 'stop'){
-            console.log('Stop Service');
+            console.log('✿❁✿❁✿❁ Stop Service ✿❁✿❁✿❁');
             isGaming = false;
             ws.send('server_stop');
         }
@@ -34,61 +34,73 @@ const ARDUINO_PIN = 13;
 var LeapMotionService = Cylon.robot({
     connections: {
         leap: { adaptor: 'leapmotion' },
-	//    arduino: { adaptor: 'firmata', port: 'COM3' } // for Windows
-    	arduino: { adaptor: 'firmata', port: '/dev/tty.usbmodemfd131' }
+//        arduino: { adaptor: 'firmata', port: 'COM3' } // for Windows
+    	arduino: { adaptor: 'firmata', port: '/dev/tty.usbmodemfd131' } // for Mac
     },
     devices: {
         servo: { driver: 'servo', pin: ARDUINO_PIN, connection: 'arduino' }
     },
     work: function (my) {
-        const GPIO_PIN = '/GPIO/24/';
-        const GPIO_URL = 'http://192.168.179.11:8080' + GPIO_PIN;   // for A
-//        const GPIO_URL = 'http://192.168.179.13:8080' + GPIO_PIN;   // for B
+        const PIN24 = '/GPIO/24/';
+        const PIN23 = '/GPIO/23/';
+        const GPIO_URL = 'http://192.168.179.11:8080';   // for A
+//        const GPIO_URL = 'http://192.168.179.13:8080';   // for B
         const ANGLE = 46;
         const RESET_ANGLE = 0;
         const ACTIVITY_TIME = 4000;
-        const INTERVAL_LONG = 500;  // Todo なくてもいいような
+        const INTERVAL_LONG = 500;
         const INTERVAL_SHORT = 200;
-        const DIRECTION = 'out';
-        var isPushed = true;
+        var isWhipping = false;
+
+        my.servo.angle(RESET_ANGLE);
         my.leap.on('frame', function (frame) {
-            if(!isGaming)
-                return;
-            if (frame.hands.length > 0 && isPushed) {
+            if (frame.hands.length > 0 && !isWhipping && isGaming) {
                 console.log('Whip ヽ(ﾟДﾟ)ﾉ');
                 my.servo.angle(ANGLE);
                 request
-                    .post(GPIO_URL + 'function/' + DIRECTION)
-                    .on('error', function (err) {
-                        console.log('Error GPIO %s',err)
+                    .post(GPIO_URL + PIN24 + 'function/out'
+                    ,function (error, response, body){
+                        if(error){
+                            console.log(error);
+                        }
                     });
                 request
-                    .post(GPIO_URL + 'value/1')
-                    .on('error', function (err) {
-                        console.log('Error GPIO %s',err)
+                    .post(GPIO_URL + PIN23 + 'function/in'
+                    ,function (error, response, body){
+                        if(error){
+                            console.log(error);
+                        }
                     });
-                isPushed = false;
+                request
+                    .post(GPIO_URL + PIN24 + 'value/1'
+                    ,function (error, response, body){
+                        if(error){
+                            console.log(error);
+                        }
+                    });
+                isWhipping = true;
                 setTimeout(function () {
                     my.servo.angle(RESET_ANGLE);
                     setTimeout(function () {
                         console.log('Be tired (u｡u *)');
                         my.servo.angle(ANGLE);
                         request
-                            .post(GPIO_URL + 'value/0')
-                            .on('error', function (err) {
-                                console.log('Error GPIO %s',err)
+                            .post(GPIO_URL + PIN24 + 'value/0'
+                            ,function (error, response, body){
+                                if(error){
+                                    console.log(error);
+                                }
                             });
                         setTimeout(function () {
                             my.servo.angle(RESET_ANGLE);
                             setTimeout(function () {
-                                console.log('Start Interval');
+                                console.log('Stop Interval');
+                                isWhipping = false;
                             }, INTERVAL_LONG);
                         }, INTERVAL_SHORT);
                     }, ACTIVITY_TIME);
                 }, INTERVAL_SHORT);
-                console.log('Stop Interval');
-            } else if (frame.hands.length == 0) {
-                isPushed = true;
+                console.log('Start Interval');
             }
         });
     }
