@@ -3,7 +3,7 @@
 
 ## Tutorial
 
-### RaspberryPiの用意（仮）
+### RaspberryPiの用意
 
 ```
 ssh user@192.168.179.11
@@ -11,6 +11,7 @@ sudo root
 # start up mjpg_streamer
 
 # start up webiopi
+
 ```
 
 ### CylonJsの準備 (Macの例)
