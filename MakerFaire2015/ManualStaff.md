@@ -7,7 +7,8 @@
 1. LeapMotionが所定の位置にあることを確認します
 1. Arduinoが乗馬マシンの所定の位置にあることを確認します
 1. ダービーロボットを開始位置に移動します
-1. LeapMotionのサービス（node RodeoMachine.js）を実行します。（初回のみ）
+1. ラズベリーパイのmjpg_streamerとwebiopiの起動を確認します
+1. （初回のみ）LeapMotionのサービス（node RodeoMachine.js）を実行します。
 1. 以上をもう１度繰り返してBマシンを設定します
 2. LeapMotionの起動コマンド（node Controller.js）を実行します。
 1. 設定が完了したら開始のラッパをつたえます
