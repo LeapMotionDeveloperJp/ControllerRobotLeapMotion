@@ -59,7 +59,6 @@
 - スマートフォン x 2
 - モバイルバッテリー x 2
 - 乾電池
-- モバイルバッテリー x 2
 
 ### LeapMotion Developers JP
 - https://www.facebook.com/groups/leapmotionJp/
