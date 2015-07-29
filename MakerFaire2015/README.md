@@ -3,7 +3,7 @@
 
 ## Tutorial
 
-### CylonJsの準備 (Mac)
+### CylonJsの準備 (Macの例)
 
 1. [Gort](http://gort.io/)の実行ファイルをダウンロード
 1. アルディーノのシリアルポート名をスキャンしてアルディーノのFirmataファームウェアをアップデート
@@ -15,7 +15,7 @@ gort scan usb
 gort arduino upload firmata /dev/cu.usbmodem14a31
 ```
 
-### 実行の例 (Mac)
+### 実行の例 (Macの例)
 
 ```
 git clone https://github.com/LeapMotionDeveloperJp/ControllerRobotLeapMotion.git
