@@ -41,8 +41,10 @@ var LeapMotionService = Cylon.robot({
         servo: { driver: 'servo', pin: ARDUINO_PIN, connection: 'arduino' }
     },
     work: function (my) {
-        const PIN24 = '/GPIO/24/';
+        const PIN7 = '/GPIO/7/';
+        const PIN8 = '/GPIO/8/';
         const PIN23 = '/GPIO/23/';
+        const PIN24 = '/GPIO/24/';
         const GPIO_URL = 'http://192.168.179.11:8080';   // for A
 //        const GPIO_URL = 'http://192.168.179.13:8080';   // for B
         const ANGLE = 46;
@@ -58,7 +60,21 @@ var LeapMotionService = Cylon.robot({
                 console.log('Whip ヽ(ﾟДﾟ)ﾉ');
                 my.servo.angle(ANGLE);
                 request
-                    .post(GPIO_URL + PIN24 + 'function/out'
+                    .post(GPIO_URL + PIN7 + 'function/in'
+                    ,function (error, response, body){
+                        if(error){
+                            console.log(error);
+                        }
+                    });
+                request
+                    .post(GPIO_URL + PIN8 + 'function/out'
+                    ,function (error, response, body){
+                        if(error){
+                            console.log(error);
+                        }
+                    });
+                request
+                    .post(GPIO_URL + PIN8 + 'value/1'
                     ,function (error, response, body){
                         if(error){
                             console.log(error);
@@ -66,6 +82,13 @@ var LeapMotionService = Cylon.robot({
                     });
                 request
                     .post(GPIO_URL + PIN23 + 'function/in'
+                    ,function (error, response, body){
+                        if(error){
+                            console.log(error);
+                        }
+                    });
+                request
+                    .post(GPIO_URL + PIN24 + 'function/out'
                     ,function (error, response, body){
                         if(error){
                             console.log(error);
@@ -84,6 +107,13 @@ var LeapMotionService = Cylon.robot({
                     setTimeout(function () {
                         console.log('Be tired (u｡u *)');
                         my.servo.angle(ANGLE);
+                        request
+                            .post(GPIO_URL + PIN8 + 'value/0'
+                            ,function (error, response, body){
+                                if(error){
+                                    console.log(error);
+                                }
+                            });
                         request
                             .post(GPIO_URL + PIN24 + 'value/0'
                             ,function (error, response, body){

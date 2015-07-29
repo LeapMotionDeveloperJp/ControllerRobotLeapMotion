@@ -37,6 +37,9 @@ node RodeoMachine.js
 node Controller.js
 ```
 
+## 動作時間
+![Image of ConfigureFig2](https://github.com/LeapMotionDeveloperJp/ControllerRobotLeapMotion/blob/master/MakerFaire2015/ConfigureFig2.jpg)
+
 ## Configuration
 ![Image of ConfigureFig1](https://github.com/LeapMotionDeveloperJp/ControllerRobotLeapMotion/blob/master/MakerFaire2015/ConfigureFig1.jpg)
 
@@ -44,6 +47,8 @@ node Controller.js
 
 #### GPIO
 
+- Pin 入力 7
+- Pin 出力 8
 - Pin 入力 23
 - Pin 出力 24
 
