@@ -20,6 +20,7 @@ var LeapMotionService = Cylon.robot({
         arduino: { adaptor: 'firmata', port: 'COM4' } // for Windows
     },
     devices: {
+        leap: { driver: 'leapmotion' },
         servo: { driver: 'servo', pin: ARDUINO_PIN, connection: 'arduino' }
     },
     work: function (my) {
@@ -36,50 +37,50 @@ var LeapMotionService = Cylon.robot({
         const INTERVAL_SHORT = 200;
         var isWhipping = false;
 
-       my.servo.angle(RESET_ANGLE);
+        my.servo.angle(RESET_ANGLE);
         my.leap.on('frame', function (frame) {
             if (frame.hands.length > 0 && !isWhipping && isGaming) {
                 console.log('Whip ヽ(ﾟДﾟ)ﾉ');
                 my.servo.angle(ANGLE);
                 request
                     .post(GPIO_URL + PIN7 + 'function/in'
-                    ,function (error, response, body){
-                        if(error){
+                    , function (error, response, body) {
+                        if (error) {
                             console.log(error);
                         }
                     });
                 request
                     .post(GPIO_URL + PIN8 + 'function/out'
-                    ,function (error, response, body){
-                        if(error){
+                    , function (error, response, body) {
+                        if (error) {
                             console.log(error);
                         }
                     });
                 request
                     .post(GPIO_URL + PIN8 + 'value/1'
-                    ,function (error, response, body){
-                        if(error){
+                    , function (error, response, body) {
+                        if (error) {
                             console.log(error);
                         }
                     });
                 request
                     .post(GPIO_URL + PIN23 + 'function/in'
-                    ,function (error, response, body){
-                        if(error){
+                    , function (error, response, body) {
+                        if (error) {
                             console.log(error);
                         }
                     });
                 request
                     .post(GPIO_URL + PIN24 + 'function/out'
-                    ,function (error, response, body){
-                        if(error){
+                    , function (error, response, body) {
+                        if (error) {
                             console.log(error);
                         }
                     });
                 request
                     .post(GPIO_URL + PIN24 + 'value/1'
-                    ,function (error, response, body){
-                        if(error){
+                    , function (error, response, body) {
+                        if (error) {
                             console.log(error);
                         }
                     });
@@ -91,15 +92,15 @@ var LeapMotionService = Cylon.robot({
                         my.servo.angle(ANGLE);
                         request
                             .post(GPIO_URL + PIN8 + 'value/0'
-                            ,function (error, response, body){
-                                if(error){
+                            , function (error, response, body) {
+                                if (error) {
                                     console.log(error);
                                 }
                             });
                         request
                             .post(GPIO_URL + PIN24 + 'value/0'
-                            ,function (error, response, body){
-                                if(error){
+                            , function (error, response, body) {
+                                if (error) {
                                     console.log(error);
                                 }
                             });
@@ -125,16 +126,16 @@ var LeapMotionService = Cylon.robot({
 });
 console.log('Start Listening');
 console.log('Wait Service');
-if(!isReady){
+if (!isReady) {
     console.log('✿❁✿❁✿❁ Start Service ✿❁✿❁✿❁');
     LeapMotionService.start();
     isReady = true;
     isGaming = true;
-}else{
+} else {
     isGaming = true;
 }
 
-function secondLog(){
+function secondLog() {
     console.log('.');
 }
 
