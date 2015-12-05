@@ -6,9 +6,11 @@
  * */
 var request = require('request');
 var Cylon = require('cylon');
+var Firebase = require("firebase");
 
 var isGaming = false;
 var isReady = false;
+var myDataRef = new Firebase('https://sweltering-torch-5950.firebaseio.com/web/data');
 
 const ARDUINO_PIN = 13;
 var LeapMotionService = Cylon.robot({
@@ -111,6 +113,12 @@ var LeapMotionService = Cylon.robot({
                     }, ACTIVITY_TIME);
                 }, INTERVAL_SHORT);
 //                console.log('Start Interval');
+
+                myDataRef.push(
+                    {step: 1}, function (error) {
+                        if (error) console.log("Data could not be saved." + error);
+                    });
+
             }
         });
     }
